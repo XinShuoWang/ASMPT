@@ -42,8 +42,8 @@ cdc->TextOutW(x, y, content);
 ```
 
 ## 中间数据结构
-为了降低用户输入模块与渲染模块之间的耦合，我使用了`graphic_elements_`，`insert_option_`, `delete_option_`等数据结构。
-这些数据结构使得用户输入模块与渲染模块之间有连接，但是又不至于太乱，每个模块都只对这些中间数据结构负责。
+为了降低用户输入模块与渲染模块之间的耦合，我使用了`std::vector<std::shared_ptr<ASMPT::Shape>>`，`ASMPT::AddEventOption`, `ASMPT::DelEventOption`等数据结构。
+这些数据结构使得用户输入模块与渲染模块之间存在联系，但是又不会导致代码逻辑混乱，每个模块都只对这些中间数据结构负责。
 关于这些具体数据结构的选型与用途参考下面的代码片段。
 
 ```
@@ -85,7 +85,7 @@ ASMPT::DelEventOption delete_option_;
 ### 队中插入
 ![insert_middle](https://user-images.githubusercontent.com/56379080/188308349-09c1d36c-50aa-42ef-a1d6-152e0d7505f6.gif)
 
-### 插入（）
+### 插入（异常情况）
 ![insert_all](https://user-images.githubusercontent.com/56379080/188308394-e356cc3b-90cf-4536-85bb-01af56aaddf5.gif)
 
 ## 删除操作
