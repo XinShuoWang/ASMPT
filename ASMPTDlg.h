@@ -56,20 +56,41 @@ private:
 	std::vector<std::shared_ptr<ASMPT::Shape>> graphic_elements_;
 	
 	// All operations of adding nodes will be recorded in this structure
-	ASMPT::AddEventOption insert_option_;
+	ASMPT::InsertEventOption insert_option_;
 
 	// All operations of deleting nodes will be recorded in this structure
-	ASMPT::DelEventOption delete_option_;
+	ASMPT::DeleteEventOption delete_option_;
 
 private:
 	/*
 	 * This function is used to determine whether the following conditions will occur,
 	 * resulting in the inability to add new nodes:
-	 * 
+	 *
 	 * 1. When the sum of the widths of all nodes exceeds the width of the window, new nodes cannot be added.
 	 * 2. When the height of the new node is greater than the height of the window, it cannot be added.
 	 */
-	bool CanInsert(std::shared_ptr<ASMPT::Shape>);
+	bool HasEnoughSpace(std::shared_ptr<ASMPT::Shape>);
+
+	/*
+	 * This function calculates what the inserted value should be
+	 * based on the value inside the insert_option_ variable
+	 */
+	ASMPT::ShapeValue GetInsertValue();
+
+	/*
+	 * The abstracted node insertion function only performs the node insertion operation 
+	 * according to the configuration in the insert_option_ variable, which can fully simplify
+	 * the operation logic of the insertion, and can also reduce the coupling 
+	 * between the rendering logic and the user input logic.
+	 */
+	void DoInsert();
+
+	/*
+	 * The abstract delete node function only performs delete operations according to the 
+	 * configuration in the delete_option_ variable, which can reduce the coupling 
+	 * between user input logic and rendering logic
+	 */
+	void DoDelete();
 
 	// Clean up the graphics in the window
 	void ClearGraph();
@@ -93,4 +114,6 @@ public:
 	afx_msg void OnLbnSelchangeAddWidth();
 	afx_msg void OnLbnSelchangeAddHeight();
 	afx_msg void OnLbnSelchangeAddReference();
+	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
+	afx_msg void OnRButtonDown(UINT nFlags, CPoint point);
 };

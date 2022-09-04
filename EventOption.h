@@ -18,6 +18,13 @@ namespace ASMPT
 	static const Reference INIT_REFERENCE = -1;
 	static const ShapeColor INIT_COLOR = ShapeColor::Green;
 
+	static const int DEFAULT_WIDTH = INIT_WIDTH;
+	static const int DEFAULT_HEIGHT = INIT_HEIGHT;
+	static const ShapeType DEFAULT_SHAPE_TYPE = INIT_SHAPE_TYPE;
+	static const InsertDirection DEFAULT_DIRECTION = INIT_DIRECTION;
+	static const Reference DEFAULT_REFERENCE = INIT_REFERENCE;
+	static const ShapeColor DEFAULT_COLOR = INIT_COLOR;
+
 	static const int SIZE_START = 50;
 	static const int SIZE_END = 150;
 	static const int SIZE_STEP = 10;
@@ -26,7 +33,7 @@ namespace ASMPT
 
 namespace ASMPT
 {
-	struct AddEventOption {
+	struct InsertEventOption {
 		ShapeType shape_type_;
 		InsertDirection dir_;
 		ShapeColor color_;
@@ -35,7 +42,7 @@ namespace ASMPT
 		uint32_t height_;
 
 		// Default construct function
-		AddEventOption() {
+		InsertEventOption() {
 			shape_type_ = INIT_SHAPE_TYPE;
 			dir_ = INIT_DIRECTION;
 			reference_ = INIT_REFERENCE;
@@ -45,12 +52,12 @@ namespace ASMPT
 		}
 	};
 
-	struct DelEventOption {
+	struct DeleteEventOption {
 		// Record the selection in the IDC_DEL_REFERENCE ListBox
 		Reference reference_;
 
 		// Default construct function
-		DelEventOption() {
+		DeleteEventOption() {
 			reference_ = INIT_REFERENCE;
 		}
 	};
